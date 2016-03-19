@@ -55,6 +55,9 @@ if config['generate_app_store_xml']
 # Generate the app store xml and copy the images needed for upload
   puts "[ITMS] Generating App Store xml..."
   base_image_names = config['app_store_image_base_names']
+  if !config['upload_app_store_screenshots']
+    base_image_names = nil
+  end
   app_store_xml, images_used = ITMSAppStore.app_store_xml(version, 'app_store/app_store_locales.tsv', 'app_store', base_image_names)
   ITMSUtils.copy_images(images_used, itms_package_name)
 end

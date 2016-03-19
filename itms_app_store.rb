@@ -51,7 +51,9 @@ class ITMSAppStore
     output += "<software_url>#{row_data[3]}</software_url>"
     output += "<privacy_url>#{row_data[4]}</privacy_url>"
     output += "<support_url>#{row_data[5]}</support_url>"
-    output += "<software_screenshots>#{software_screenshots(locale_name)}</software_screenshots>"
+    if @@base_image_names
+      output += "<software_screenshots>#{software_screenshots(locale_name)}</software_screenshots>"
+    end
     output += "</locale>"
   end
 
