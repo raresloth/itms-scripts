@@ -27,6 +27,8 @@ Once you have your setup complete, open terminal and run:
 
 `--skip-download` - skips the itms package download (use this if you already have an .itmsp package you're working with)
 
+`--only-download` - only downloads the itms package (does not replace contents or upload)
+
 ## Config
 `username`,`password` - Your iTunes Connect account username and password (don't commit that).
 
@@ -38,6 +40,8 @@ This only affects the app store metadata and screenshots, not IAP or Game Center
 
 `app_store_image_base_names` - An array of strings describing how you want to name your app store images, starting with iPhone 4 (3.5") and increasing in size to iPad Pro.
 See the [App Store Images](#app-store-images) section below for more information.
+
+`upload_app_store_screenshots` - Set to false if you don't want to upload screenshots.
 
 `generate_xyz` options - Toggles for what you want to upload.
 
@@ -109,6 +113,9 @@ cs, zh-Hans, zh-Hant
 
 ### Leaderboards
 If you're submitting leaderboards, the iTMSTransporter tool does not support using leaderboard sets yet, so you'll be limited to 100 leaderboards.
+
+### iTunes Connect
+It takes a little while for iTunes Connect to update with the information uploaded through the iTMSTransporter tool depending on the type of information you're uploading. App descriptions can take up to 5 minutes, achievements and leaderboards could take longer. After you run the script, just give it some time before checking iTunes Connect to ensure all the data is there.
 
 # Need Help?
 
