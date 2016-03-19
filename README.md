@@ -51,6 +51,8 @@ See the [App Store Images](#app-store-images) section below for more information
 
 `clean_after_submit` - Removes the itms package after successfully submitting it.
 
+By default, `upload_after_verify` is set to `false` since you should do a dry run first to ensure all your data looks right.
+
 ## App Store Images
 Use the following convention to name your app store images that you want to upload:
 
