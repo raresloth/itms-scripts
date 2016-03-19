@@ -1,0 +1,3 @@
+id,locale name,title,formatter type,image name
+f2.gold.total,en-US,Total Gold Found,INTEGER_COMMA_SEPARATOR,leaderboards_gold.png
+f2.gold.total,de-DE,Gesamtes Gold gefunden,INTEGER_DECIMAL_SEPARATOR,leaderboards_gold.png
