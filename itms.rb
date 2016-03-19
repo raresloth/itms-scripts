@@ -16,6 +16,7 @@ if ARGV.include? '-c'
 end
 
 skip_download = ARGV.include? '--skip-download'
+only_download = ARGV.include? '--only-download'
 
 unless File.exists? config_filename
   puts "[ITMS] Could not find config filename #{config_filename}"
@@ -43,6 +44,10 @@ unless skip_download
   unless ITMSUtils.download_metadata(username, password, vendor_id, destination, log_name)
     puts "[ITMS] [ERROR] Failed to download itms package #{vendor_id}, check #{log_name} for more info"
     exit 2
+  end
+  if only_download
+    puts "[ITMS] Completed download"
+    exit 0
   end
 end
 
