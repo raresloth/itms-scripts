@@ -25,9 +25,9 @@ end
 
 config = JSON.parse(File.read(config_filename))
 username = config['username']
-username = ENV['ITMS_USERNAME'] unless username.present?
+username = ENV['ITMS_USERNAME'] if username.nil?
 password = config['password']
-password = ENV['ITMS_PASSWORD'] unless password.present?
+password = ENV['ITMS_PASSWORD'] if password.nil?
 vendor_id = config['vendor_id']
 version = config['version']
 
