@@ -30,7 +30,7 @@ Once you have your setup complete, open terminal and run:
 `--only-download` - only downloads the itms package (does not replace contents or upload)
 
 ## Config
-`username`,`password` - Your iTunes Connect account username and password (don't commit that).
+`username`,`password` - Your iTunes Connect account username and password (don't commit that). Note: You can remove these entries and set the ITMS\_USERNAME and ITMS\_PASSWORD environment variables instead.
 
 `vendor_id` - The SKU for the app you want to update.
 This can be found in iTunes Connect by navigating to your app, go to the App Information tab, then look under the General Information section.
