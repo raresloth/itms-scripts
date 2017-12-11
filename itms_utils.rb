@@ -23,7 +23,17 @@ class ITMSUtils
   end
 
   def self.image_data_string(image_dir, image_name)
+    if !image_name || image_name.length == 0
+      raise Exception.new("Image name cannot be blank")
+      return
+    end
+
     full_path = "#{image_dir}/#{image_name}"
+
+    if !File.exists?(full_path)
+      raise Exception.new("Image cannot be found: #{full_path}")
+      return
+    end
 
     output = "<size>#{File.size(full_path)}</size>"
     output += "<file_name>#{image_name}</file_name>"
