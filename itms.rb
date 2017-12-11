@@ -28,11 +28,11 @@ username = config['username']
 username = ENV['ITMS_USERNAME'] if username.nil?
 password = config['password']
 password = ENV['ITMS_PASSWORD'] if password.nil?
-vendor_id = config['vendor_id']
+app_id = config['app_id']
 version = config['version']
 
 destination = '.'
-itms_package_name = "#{vendor_id}.itmsp"
+itms_package_name = "#{app_id}.itmsp"
 
 log_name = 'itms.log'
 
@@ -41,10 +41,10 @@ if File.exists? log_name
 end
 
 unless skip_download
-  puts "[ITMS] Downloading itms package #{vendor_id}"
+  puts "[ITMS] Downloading itms package #{app_id}"
   # Download the itms package to get a stub
-  unless ITMSUtils.download_metadata(username, password, vendor_id, destination, log_name)
-    puts "[ITMS] [ERROR] Failed to download itms package #{vendor_id}, check #{log_name} for more info"
+  unless ITMSUtils.download_metadata(username, password, app_id, destination, log_name)
+    puts "[ITMS] [ERROR] Failed to download itms package #{app_id}, check #{log_name} for more info"
     exit 2
   end
   if only_download
@@ -54,7 +54,7 @@ unless skip_download
 end
 
 unless File.exists? File.expand_path(itms_package_name)
-  puts "[ITMS] Missing itms package for #{vendor_id}"
+  puts "[ITMS] Missing itms package for #{app_id}"
   exit 3
 end
 
@@ -98,18 +98,18 @@ ITMSUtils.replace_xml(metadata_filename, version, app_store_xml, iap_xml, achiev
 package_filepath = "#{destination}/#{itms_package_name}"
 # Verify if needed
 if config['verify']
-  puts "[ITMS] Verifying itms package #{vendor_id}"
+  puts "[ITMS] Verifying itms package #{app_id}"
   unless ITMSUtils.verify_metadata(username, password, package_filepath, log_name)
-    puts "[ITMS] [ERROR] Failed to verify metadata for itms package #{vendor_id}, check #{log_name} for more info"
+    puts "[ITMS] [ERROR] Failed to verify metadata for itms package #{app_id}, check #{log_name} for more info"
     exit 4
   end
 end
 
 # Submit if needed
 if config['upload_after_verify']
-  puts "[ITMS] Uploading itms package #{vendor_id}"
+  puts "[ITMS] Uploading itms package #{app_id}"
   unless ITMSUtils.upload_metadata(username, password, package_filepath, log_name)
-    puts "[ITMS] [ERROR] Failed to submit metadata for itms package #{vendor_id}, check #{log_name} for more info"
+    puts "[ITMS] [ERROR] Failed to submit metadata for itms package #{app_id}, check #{log_name} for more info"
     exit 5
   end
 end

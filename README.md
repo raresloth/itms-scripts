@@ -32,8 +32,8 @@ Once you have your setup complete, open terminal and run:
 ## Config
 `username`,`password` - Your iTunes Connect account username and password (don't commit that). Note: You can remove these entries and set the ITMS\_USERNAME and ITMS\_PASSWORD environment variables instead.
 
-`vendor_id` - The SKU for the app you want to update.
-This can be found in iTunes Connect by navigating to your app, go to the App Information tab, then look under the General Information section.
+`app_id` - The id for the app you want to update.
+This can be found in iTunes Connect by navigating to your app, go to the App Information tab, then look under the General Information section for Apple ID.
 
 `version` - The version of your app you're making updates to.
 This only affects the app store metadata and screenshots, not IAP or Game Center.

@@ -4,8 +4,8 @@ require 'set'
 TRANSPORTER_PATH = '/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter'
 
 class ITMSUtils
-  def self.download_metadata(username, password, vendor_id, destination, log_name)
-    cmd = "#{TRANSPORTER_PATH} -m lookupMetadata -u #{username} -p #{password} -vendor_id #{vendor_id} -destination #{destination} &> #{log_name}"
+  def self.download_metadata(username, password, app_id, destination, log_name)
+    cmd = "#{TRANSPORTER_PATH} -m lookupMetadata -u #{username} -p #{password} -apple_id #{app_id} -destination #{destination} &> #{log_name}"
 
     unless system(cmd)
       return false
