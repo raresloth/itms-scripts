@@ -107,11 +107,11 @@ While working with these scripts, it was apparent that some languages would not 
 
 **Known Supported Languages**
 
-de-DE, en, es, fr, it, ja, ko, ms, nl-NL, pt-BR, pt-PT, ru, th
+de-DE, en-US, es-ES, es-MX, fr-FR, it, ja, ko, ms, nl-NL, pt-BR, pt-PT, ru, sv, th, zh-Hans, zh-Hant
 
 **Known Unsupported Languages**
 
-cs, zh-Hans, zh-Hant
+cs
 
 ### Leaderboards
 If you're submitting leaderboards, the iTMSTransporter tool does not support using leaderboard sets yet, so you'll be limited to 100 leaderboards.
