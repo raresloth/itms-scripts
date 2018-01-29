@@ -6,12 +6,7 @@ TRANSPORTER_PATH = '/Applications/Xcode.app/Contents/Applications/Application\ L
 class ITMSUtils
   def self.download_metadata(username, password, app_id, destination, log_name)
     cmd = "#{TRANSPORTER_PATH} -m lookupMetadata -u #{username} -p #{password} -apple_id #{app_id} -destination #{destination} &> #{log_name}"
-
-    unless system(cmd)
-      return false
-    end
-
-    return true
+    return system(cmd)
   end
 
   def self.copy_images(image_filenames, destination)
@@ -86,23 +81,9 @@ class ITMSUtils
     end
   end
 
-  def self.verify_metadata(username, password, filepath, log_name)
-    cmd = "#{TRANSPORTER_PATH} -m verify -f #{filepath} -u #{username} -p #{password} &> #{log_name}"
-
-    unless system(cmd)
-      return false
-    end
-
-    return true
-  end
-
-  def self.upload_metadata(username, password, filepath, log_name)
-    cmd = "#{TRANSPORTER_PATH} -m upload -f #{filepath} -u #{username} -p #{password} &> #{log_name}"
-
-    unless system(cmd)
-      return false
-    end
-
-    return true
+  def self.upload_metadata(username, password, filepath, log_name, dry_run)
+    method = dry_run ? 'verify' : 'upload'
+    cmd = "#{TRANSPORTER_PATH} -m #{method} -f #{filepath} -u #{username} -p #{password} &> #{log_name}"
+    return system(cmd)
   end
 end

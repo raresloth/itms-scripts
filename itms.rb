@@ -96,22 +96,13 @@ metadata_filename = "#{itms_package_name}/metadata.xml"
 ITMSUtils.replace_xml(metadata_filename, version, app_store_xml, iap_xml, achievements_xml, leaderboards_xml)
 
 package_filepath = "#{destination}/#{itms_package_name}"
-# Verify if needed
-if config['verify']
-  puts "[ITMS] Verifying itms package #{app_id}"
-  unless ITMSUtils.verify_metadata(username, password, package_filepath, log_name)
-    puts "[ITMS] [ERROR] Failed to verify metadata for itms package #{app_id}, check #{log_name} for more info"
-    exit 4
-  end
-end
-
-# Submit if needed
-if config['upload_after_verify']
-  puts "[ITMS] Uploading itms package #{app_id}"
-  unless ITMSUtils.upload_metadata(username, password, package_filepath, log_name)
-    puts "[ITMS] [ERROR] Failed to submit metadata for itms package #{app_id}, check #{log_name} for more info"
-    exit 5
-  end
+# dry_run will trigger a verify with the package instead of an upload
+dry_run = config['dry_run']
+method = dry_run ? 'verify' : 'upload'
+puts "[ITMS] #{method} itms package #{app_id}"
+unless ITMSUtils.upload_metadata(username, password, package_filepath, log_name, dry_run)
+  puts "[ITMS] [ERROR] Failed to #{dry_run} metadata for itms package #{app_id}, check #{log_name} for more info"
+  exit 4
 end
 
 # Clean if needed
