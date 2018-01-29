@@ -51,7 +51,7 @@ See the [App Store Images](#app-store-images) section below for more information
 
 `clean_after_submit` - Removes the itms package after successfully submitting it.
 
-By default, `upload_after_verify` is set to `false` since you should do a dry run first to ensure all your data looks right.
+By default, `upload_after_verify` is set to `true` since you should do a dry run first to ensure all your data looks right.
 
 ## App Store Images
 Use the following convention to name your app store images that you want to upload:
@@ -92,9 +92,13 @@ The given filenames cannot be changed as of now, they are as follows:
 
 `achievements/achievements_locales.csv` - Provides the title, before description, after description, and image name for each achievement for each locale.
 
+`achievements/*.png` - The images defined in achievements_locales are stored in the achievements folder and need to have a resolution of 512x512 or 1024x1024.
+
 `leaderboards/leaderboards_metadata.csv` - Provides the id, reference name, and sort order for each leaderboard.
 
 `leaderboards/leaderboards_locales.csv` - Provides the title, formatter type, and image name for each leaderboard for each locale.
+
+`leaderboards/*.png` - The images defined in leaderboards_locales are stored in the leaderboards folder and need to have a resolution of 512x512 or 1024x1024.
 
 Here's a Google Sheets template with all the csv/tsv templates: [iTMS Metadata Template](https://docs.google.com/spreadsheets/d/1kFDrGsMZQzgTpbhx9E1ebliKce4fAjl6TSuHdXlrZso/edit?usp=sharing)
 
