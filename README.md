@@ -6,11 +6,11 @@ The alternative would be to click your way through itunesconnect.apple.com to fi
 If you're looking to just upload screenshots and App Store metadata, we recommend checking out [deliver](https://github.com/fastlane/fastlane/tree/master/deliver).
 
 ## Features
-* Upload localized screenshots
-* Upload localized App Store descriptions, keywords, and other metadata
-* Upload localized In-App Purchases
 * Upload localized Game Center Achievements
 * Upload localized Game Center Leaderboards
+* Upload localized App Store descriptions, keywords, and other metadata
+* Upload localized In-App Purchases
+* Upload localized screenshots
 
 ## Usage
 Setup your `itms.config` file for your app. See the [Config](#config) section below for all the options.
@@ -21,16 +21,16 @@ Once you have your setup complete, open terminal and run:
 ```
 ./itms.rb
 ```
-**Options:**
+**itms.rb options:**
 
-`-c config_filename` - specify a different config filename
+`-c config_filename` - specify a different config filename. The default is `./itms.config`.
 
 `--skip-download` - skips the itms package download (use this if you already have an .itmsp package you're working with)
 
 `--only-download` - only downloads the itms package (does not replace contents or upload)
 
 ## Config
-`username`,`password` - Your iTunes Connect account username and password (don't commit that). Note: You can remove these entries and set the ITMS\_USERNAME and ITMS\_PASSWORD environment variables instead.
+`username`,`password` - Your iTunes Connect account username and password (don't commit that). **Note:** You can remove these entries and set the ITMS\_USERNAME and ITMS\_PASSWORD environment variables instead.
 
 `app_id` - The id for the app you want to update.
 This can be found in iTunes Connect by navigating to your app, go to the App Information tab, then look under the General Information section for Apple ID.
@@ -43,15 +43,17 @@ See the [App Store Images](#app-store-images) section below for more information
 
 `upload_app_store_screenshots` - Set to false if you don't want to upload screenshots.
 
-`generate_xyz` options - Toggles for what you want to upload.
+`generate_app_store_xml` - App Store localizations in the `./app_store` directory will be generated for upload if true.
 
-`verify` - Verifies your package before uploading. This happens during upload anyways so it should just be used as a dry run.
+`generate_iap_xml` - In App Purchase localizations in the `./iap` directory will be generated for upload if true.
 
-`upload_after_verify` - Uploads your package after verifying (or immediately if `verify` is false).
+`generate_achievements_xml` - Game Center Achievement localizations in the `./achievements` directory will be generated for upload if true.
 
-`clean_after_submit` - Removes the itms package after successfully submitting it.
+`generate_leaderboards_xml` - Game Center Leaderboard localizations in the `./leaderboards` directory will be generated for upload if true.
 
-By default, `upload_after_verify` is set to `true` since you should do a dry run first to ensure all your data looks right.
+`dry_run` - Verifies your package with the App Store if true. Otherwise the package will be uploaded. Note that an invalid package will fail during upload.
+
+`clean_after_submit` - Removes the itms package after successfully verifying or uploading it.
 
 ## App Store Images
 Use the following convention to name your app store images that you want to upload:
