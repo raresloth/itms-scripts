@@ -55,6 +55,7 @@ class ITMSAppStore
       output += "<software_screenshots>#{software_screenshots(locale_name)}</software_screenshots>"
     end
     output += "</locale>"
+    output
   end
 
   def self.app_store_xml(version, input_locale_filename, locales_directory, base_image_names)

@@ -52,6 +52,7 @@ class ITMSIAP
     output += "<locales>#{locale_strings_for_id(id)}</locales>"
     output += "<review_screenshot>#{image_data_string}</review_screenshot>"
     output += "</in_app_purchase>"
+    output
   end
 
   def self.iap_xml(input_metadata_filename, input_locale_filename, input_images_directory)

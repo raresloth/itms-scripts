@@ -1,11 +1,11 @@
 require 'digest'
 require 'set'
 
-TRANSPORTER_PATH = '/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/itms/bin/iTMSTransporter'
+TRANSPORTER_CMD = 'xcrun iTMSTransporter'
 
 class ITMSUtils
   def self.download_metadata(username, password, app_id, destination, log_name)
-    cmd = "#{TRANSPORTER_PATH} -m lookupMetadata -u #{username} -p #{password} -apple_id #{app_id} -destination #{destination} &> #{log_name}"
+    cmd = "#{TRANSPORTER_CMD} -m lookupMetadata -u #{username} -p #{password} -apple_id #{app_id} -destination #{destination} &> #{log_name}"
     return system(cmd)
   end
 
@@ -33,6 +33,7 @@ class ITMSUtils
     output = "<size>#{File.size(full_path)}</size>"
     output += "<file_name>#{image_name}</file_name>"
     output += "<checksum type=\"md5\">#{Digest::MD5.file(full_path).hexdigest}</checksum>"
+    output
   end
 
   def self.locale_row_data_by_id(input_locales)
@@ -68,11 +69,17 @@ class ITMSUtils
     metadata_contents.sub!(/<in_app_purchases>.*<\/in_app_purchases>/m, iap_xml ? iap_xml : '')
     metadata_contents.force_encoding('UTF-8')
 
-    metadata_contents.sub!(/<achievements>.*<\/achievements>/m, achievements_xml ? achievements_xml : '')
-    metadata_contents.force_encoding('UTF-8')
+    # Remove the game center section if both achievements and leaderboards are missing
+    if !achievements_xml && !leaderboards_xml
+      metadata_contents.sub!(/<game_center>.*<\/game_center>/m, '')
+      metadata_contents.force_encoding('UTF-8')
+    else
+      metadata_contents.sub!(/<achievements>.*<\/achievements>/m, achievements_xml ? achievements_xml : '')
+      metadata_contents.force_encoding('UTF-8')
 
-    metadata_contents.sub!(/<leaderboards>.*<\/leaderboards>/m, leaderboards_xml ? leaderboards_xml : '')
-    metadata_contents.force_encoding('UTF-8')
+      metadata_contents.sub!(/<leaderboards>.*<\/leaderboards>/m, leaderboards_xml ? leaderboards_xml : '')
+      metadata_contents.force_encoding('UTF-8')
+    end
 
     File.truncate(metadata_filepath, 0)
     File.open(metadata_filepath,"r+") do |f|
@@ -83,7 +90,7 @@ class ITMSUtils
 
   def self.upload_metadata(username, password, filepath, log_name, dry_run)
     method = dry_run ? 'verify' : 'upload'
-    cmd = "#{TRANSPORTER_PATH} -m #{method} -f #{filepath} -u #{username} -p #{password} &> #{log_name}"
+    cmd = "#{TRANSPORTER_CMD} -m #{method} -f #{filepath} -u #{username} -p #{password} &> #{log_name}"
     return system(cmd)
   end
 end

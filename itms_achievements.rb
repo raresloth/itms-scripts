@@ -13,6 +13,7 @@ class ITMSAchievements
     output += "<after_earned_description>#{after_description}</after_earned_description>"
     output += "<achievement_after_earned_image>#{image_data_string}</achievement_after_earned_image>"
     output += "</locale>"
+    output
   end
 
   def self.locale_strings_for_id(id)
@@ -44,6 +45,7 @@ class ITMSAchievements
     achievement += "<hidden>#{hidden}</hidden>"
     achievement += "<locales>#{locale_strings_for_id(id)}</locales>"
     achievement += "</achievement>"
+    achievement
   end
 
   def self.achievements_xml(input_metadata_filename, input_locale_filename, input_images_directory)

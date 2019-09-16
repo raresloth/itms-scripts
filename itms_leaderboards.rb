@@ -12,6 +12,7 @@ class ITMSLeaderboards
     output += "<formatter_type>#{formatter_type}</formatter_type>"
     output += "<leaderboard_image>#{image_data_string}</leaderboard_image>"
     output += "</locale>"
+    output
   end
 
   def self.locale_strings_for_id(id)
@@ -41,6 +42,7 @@ class ITMSLeaderboards
     leaderboard += "<sort_ascending>#{sort_ascending}</sort_ascending>"
     leaderboard += "<locales>#{locale_strings_for_id(id)}</locales>"
     leaderboard += "</leaderboard>"
+    leaderboard
   end
 
   def self.leaderboards_xml(input_metadata_filename, input_locale_filename, input_images_directory)
