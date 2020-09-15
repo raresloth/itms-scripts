@@ -44,7 +44,7 @@ class ITMSIAP
     <cleared_for_sale>#{cleared_for_sale}</cleared_for_sale>\
     <intervals>\
       <interval>\
-        <start_date>#{Time.now.strftime("%Y-%m-%d")}</start_date>\
+        <start_date>#{(Time.now - 86400).strftime("%Y-%m-%d")}</start_date>\
         <wholesale_price_tier>#{price_tier}</wholesale_price_tier>\
       </interval>\
     </intervals>\
