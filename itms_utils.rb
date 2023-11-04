@@ -5,7 +5,7 @@ TRANSPORTER_CMD = 'xcrun iTMSTransporter'
 
 class ITMSUtils
   def self.download_metadata(username, password, app_id, destination, log_name)
-    cmd = "#{TRANSPORTER_CMD} -m lookupMetadata -u #{username} -p #{password} -apple_id #{app_id} -destination #{destination} &> #{log_name}"
+    cmd = "#{TRANSPORTER_CMD} -m lookupMetadata -u #{username} -p \"#{password}\" -apple_id #{app_id} -destination #{destination} &> #{log_name}"
     return system(cmd)
   end
 
@@ -90,7 +90,7 @@ class ITMSUtils
 
   def self.upload_metadata(username, password, filepath, log_name, dry_run)
     method = dry_run ? 'verify' : 'upload'
-    cmd = "#{TRANSPORTER_CMD} -m #{method} -f #{filepath} -u #{username} -p #{password} &> #{log_name}"
+    cmd = "#{TRANSPORTER_CMD} -m #{method} -f #{filepath} -u #{username} -p \"#{password}\" &> #{log_name}"
     return system(cmd)
   end
 end
